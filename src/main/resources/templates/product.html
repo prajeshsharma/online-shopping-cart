@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::title}, ~{::section})">
+<head>
+    <title>Product</title>
+</head>
+<body>
+
+<section>
+    <table border="1">
+        <thead>
+        <tr>
+            <th> ID</th>
+            <th> Name</th>
+            <th> Description</th>
+            <th> Price (USD)</th>
+            <th> Quantity</th>
+            <th> Image URL</th>
+            <th> Category ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${products.empty}">
+            <td colspan="2"> No Products Available</td>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td><span th:text="${product.product_id}"></span></td>
+            <td><span th:text="${product.name}"></span></td>
+            <td><span th:text="${product.description}"></span></td>
+            <td>$<span th:text="${product.price}"></span></td>
+            <td><span th:text="${product.quantity}"> Quantity </span></td>
+            <td><span th:text="${product.image_url}"></span></td>
+            <td><span th:text="${product.category_id}"> Category ID </span></td>
+        </tr>
+        </tbody>
+    </table>
+    <form action="#" th:action="@{product/addproduct}" th:object="${productModel}" method="get">
+        <input type="submit" value="Add a Product!" />
+    </form>
+</section>
+
+</body>
+</html>

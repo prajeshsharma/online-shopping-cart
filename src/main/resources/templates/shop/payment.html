@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::title}, ~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+</head>
+<body>
+ <section>
+     <form action="#" th:action="@{/shop/payment}" th:object="${paymentModel}" method="post">
+         <label for="cardName">Name on card:</label><br>
+         <input type="text" id="cardName" th:field="*{cardName}" value=""><br>
+         <p th:if="${#fields.hasErrors('cardName')}" th:errors="*{cardName}" />
+         <label for="cardNumber">Card number:</label><br>
+         <input type="text" id="cardNumber" th:field="*{cardNumber}" value=""><br>
+         <p th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}" />
+         <table>
+             <tr>
+                 <td><label for="month">Expiration Month:</label></td>
+                 <td><label for="year">Expiration Year:</label></td>
+             </tr>
+             <tr>
+                 <td>
+                     <select id="month" th:field="*{month}"><br>
+                         <option value="1">1</option>
+                         <option value="2">2</option>
+                         <option value="3">3</option>
+                         <option value="4">4</option>
+                         <option value="5">5</option>
+                         <option value="6">6</option>
+                         <option value="7">7</option>
+                         <option value="8">8</option>
+                         <option value="9">9</option>
+                         <option value="10">10</option>
+                         <option value="11">11</option>
+                         <option value="12">12</option>
+                     </select>
+                 </td>
+                 <td><input type="text" id="year" th:field="*{year}" value=""></td>
+                 <p th:if="${#fields.hasErrors('year')}" th:errors="*{year}" />
+             </tr>
+         </table>
+         <label for="cvv">cvv:</label><br>
+         <input type="text" id="cvv" th:field="*{cvv}" value=""><br><br>
+         <p th:if="${#fields.hasErrors('cvv')}" th:errors="*{cvv}" />
+         <input type="submit" value="Confirm">
+     </form>
+ </section>
+</body>
+</html>

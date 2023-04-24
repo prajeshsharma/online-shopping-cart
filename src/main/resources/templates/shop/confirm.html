@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::title}, ~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm</title>
+</head>
+<body>
+<section>
+    <div>
+        <table style="width:100%">
+            <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Unit price</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            <tr th:each="item : ${cart.items}">
+                <td><span th:text="${item.imageUrl}"></span></td>
+                <td><span th:text="${item.name}"></span></td>
+                <td>$<span th:text="${item.price}"></span></td>
+                <td><span th:text="${item.quantity}"></span></td>
+                <td>$<span th:text="${item.price}"></span></td>
+            </tr>
+            <tr>
+                <td colspan="4">Subtotal</td>
+                <td>$<span th:text="${cart.subtotal}"></span></td>
+            </tr>
+        </table><br>
+    </div>
+
+    <div>
+        <label for="address">Street Name:</label><br>
+        <span th:text="${shippingModel.address}"></span><br>
+        <label for="city">City:</label><br>
+        <span th:text="${shippingModel.city}"></span><br>
+        <label for="state">State:</label><br>
+        <span th:text="${shippingModel.state}"></span><br>
+        <label for="zipcode">Zip Code:</label>
+        <span th:text="${shippingModel.zipcode}"></span><br>
+    </div>
+
+    <div>
+        <label for="cardName">Name on card:</label><br>
+        <span th:text="${paymentModel.cardName}"></span><br>
+        <label for="cardNumber">Card number:</label><br>
+        <span th:text="${paymentModel.cardNumber}"></span><br>
+            <table>
+                <tr>
+                    <td><label for="month">Expiration Month:</label></td>
+                    <td><label for="year">Expiration Year:</label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span th:text="${paymentModel.month}"></span><br>
+                    </td>
+                    <td><span th:text="${paymentModel.year}"></span><br></td>
+                </tr>
+            </table>
+            <label for="cvv">cvv:</label><br>
+        <span th:text="${paymentModel.cvv}"></span><br>
+    </div>
+    <button onclick="window.location.href='/shop';">continue shopping</button>
+    <button onclick="window.location.href='/shop/submit';">Confirm</button>
+
+</section>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Category</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th> ID</th>
+        <th> Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${categories.empty}">
+        <td colspan="2"> No Books Available</td>
+    </tr>
+    <tr th:each="category : ${categories}">
+        <td><span th:text="${category.category_id}"> ID </span></td>
+        <td><span th:text="${category.name}"> Name </span></td>
+    </tr>
+    </tbody>
+</table>
+
+<form action="#" th:action="@{category/addcategory}" th:object="${categoryModel}" method="get">
+    <input type="submit" value="Add a Category!" />
+</form>
+</body>
+</html>

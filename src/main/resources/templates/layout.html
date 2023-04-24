@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title, content)">
+<head>
+    <meta charset="UTF-8">
+    <title th:replace="${title}">Layout Title</title>
+    <link rel="stylesheet" type="text/css" href="/store.css" />
+    <link rel="stylesheet" type="text/css" href="/menu.css" />
+</head>
+<body>
+    <div id="wrapper">
+        <div id="headerwrap">
+        <div id="header">
+            <p>This is the Header</p>
+            <div style="float: right;" th:if="${user == null}">
+                <p>Hello, there! | cart(
+                    <span onclick="window.location='/shop/add'" th:if="${cart != null}"th:text="${cart.items.size()}"/>
+                    <span th:if="${cart == null}" th:text="0"/>)
+                    <span>| <a href="/login">Log In</a></span></p>
+            </div>
+            <div style="float: right;" th:if="${user != null}">
+                <p>Hello, <span th:text="${user.name}"></span>|cart(<span th:if="${cart != null}" th:text="${cart.items.size()}"/>)<span> | <a href="/logout">Log Out</a></span></p>
+            </div>
+
+        </div>
+        </div>
+        <div id="navigationwrap">
+        <div id="navigation">
+            <div th:insert="menu"></div>
+        </div>
+        </div>
+        <div id="contentliquid"><div id="contentwrap">
+        <div id="content">
+            <section th:replace="${content}">
+                <p>Layout contents</p>
+            </section>
+        </div>
+        </div></div>
+        <div id="leftcolumnwrap">
+        <div id="leftcolumn">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.</p>
+        </div>
+        </div>
+        <div id="footerwrap">
+        <div id="footer">
+            <p>© 2023 Made with ❤️ by Prajesh</p>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

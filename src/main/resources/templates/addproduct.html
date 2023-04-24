@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+</head>
+<body>
+<form action="#" th:action="@{/admin/product/addproduct}" th:object="${productModel}" method="post">
+    <label for="name">Name:</label><br>
+    <input type="text" th:field="*{name}"><br>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
+    <label for="description">Description:</label><br>
+    <input type="text" th:field="*{description}"><br>
+    <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" />
+    <label for="price">Price:</label><br>
+    <input type="number" th:field="*{price}"><br>
+    <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" />
+    <label for="quantity">Quantity:</label><br>
+    <input type="number" th:field="*{quantity}"><br>
+    <p th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" />
+    <label for="imageUrl">Image URL:</label><br>
+    <input type="file" th:field="*{imageUrl}"><br>
+    <p th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" />
+    <label for="categoryId">Category ID:</label><br>
+    <input type="number" th:field="*{categoryId}"><br>
+    <p th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}" />
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
