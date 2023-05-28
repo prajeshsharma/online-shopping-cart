@@ -1,16 +1,12 @@
 package com.store.goat.model;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class CategoryModel {
     @NotEmpty(message = "Please enter Category")
     private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

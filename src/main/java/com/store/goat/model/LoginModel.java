@@ -1,25 +1,17 @@
 package com.store.goat.model;
 
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class LoginModel {
     @NotEmpty
     @Email(message = "Please enter valid email")
     String email;
     @NotEmpty(message = "Please enter password")
     String password;
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 }

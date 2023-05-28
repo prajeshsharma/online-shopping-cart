@@ -17,8 +17,8 @@ public class CartModel {
 
     public Double getSubtotal() {
         subtotal = 0.0;
-        for (ProductModel item : items)
-            subtotal += item.getTotalPrice();
+        for (ProductModel ignored : items)
+            subtotal += getTotal();
         return subtotal;
     }
 

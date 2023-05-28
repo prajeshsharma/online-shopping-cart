@@ -19,9 +19,7 @@ public class ModelInterceptor implements HandlerInterceptor {
         Map<String, Object> model = modelAndView.getModel();
         HttpSession session = request.getSession();
         User u = SessionUtil.getLoggedInUser(session);
-        if (u != null) {
-            model.put("user", u);
-        }
+        if (u != null) model.put("user", u);
         model.put("cart", SessionUtil.getCart(session));
     }
 }

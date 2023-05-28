@@ -2,7 +2,6 @@ package com.store.goat.controller;
 
 import com.store.goat.dao.User;
 import com.store.goat.dao.UserRepository;
-import com.store.goat.model.CartModel;
 import com.store.goat.model.LoginModel;
 import com.store.goat.model.UserModel;
 import com.store.goat.utils.SessionUtil;
@@ -10,11 +9,9 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -23,7 +20,7 @@ public class HomeController {
     @Autowired
     private UserRepository userRepository;
     @GetMapping("/signup")
-    public String signupForm(UserModel userModel) {
+    public String signupForm() {
         return "signup";
     }
     @PostMapping("/signup")
@@ -49,9 +46,10 @@ public class HomeController {
         return "placeholder";
     }
     @GetMapping("/login")
-    public String loginForm(Model model, LoginModel loginModel) {
+    public String loginForm() {
         return "login";
     }
+
     @PostMapping("/login")
     public String loginFormSubmit(@Valid LoginModel loginModel, BindingResult errors, HttpSession session) {
         if (errors.hasErrors()) return "login";
@@ -64,7 +62,7 @@ public class HomeController {
         return "login";
     }
     @GetMapping("/logout")
-    public String logout(Model model, HttpSession session) {
+    public String logout(HttpSession session) {
         SessionUtil.logOut(session);
         return "redirect:/";
     }
