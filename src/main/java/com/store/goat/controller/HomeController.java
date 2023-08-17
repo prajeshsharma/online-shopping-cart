@@ -20,7 +20,7 @@ public class HomeController {
     @Autowired
     private UserRepository userRepository;
     @GetMapping("/signup")
-    public String signupForm() {
+    public String signupForm(UserModel userModel) {
         return "signup";
     }
     @PostMapping("/signup")
@@ -34,7 +34,7 @@ public class HomeController {
         }
         String email = userModel.getEmail();
         List<User> u = userRepository.findByEmail(email);
-        if (u != null && u.size() > 0) {
+        if (u != null && !u.isEmpty()) {
             errors.rejectValue("email", "email.exists", "This email belongs to an existing user");
             return "signup";
         }
