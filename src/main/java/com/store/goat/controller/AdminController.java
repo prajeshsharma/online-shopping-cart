@@ -35,6 +35,11 @@ public class AdminController {
         return "category";
     }
 
+    /**
+     * adds product to product table
+     * @param model model to be gotten
+     * @return product
+     */
     @GetMapping("/admin/product")
     public String adminProduct(Model model) {
         List<Product> products = productRepository.findAll();

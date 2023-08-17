@@ -14,7 +14,6 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-
 public class Orders {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

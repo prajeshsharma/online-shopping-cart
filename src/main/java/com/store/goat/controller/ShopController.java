@@ -24,9 +24,9 @@ public class ShopController {
     @Autowired
     private PaymentRepository paymentRepository;
     @Autowired
-    private OrderitemRepository orderitemRepository;
+    private OrderItemRepository orderitemRepository;
     @GetMapping("/shop")
-    public String shop(ProductModel productModel, Model model) {
+    public String shop(Model model) {
         List<Product> products = productRepository.findAll();
         model.addAttribute("products", products);
         return "shop/products";
@@ -48,24 +48,18 @@ public class ShopController {
         return "shop/cart";
     }
     @GetMapping("/shop/shipping")
-    public String shippingForm(ShippingModel shippingModel, HttpSession session) {
-        if (SessionUtil.getLoggedInUser(session) == null) {
-            System.out.println("not logged in");
-            return "redirect:/login";
-        }
-        System.out.println("logged in");
-        return "shop/shipping";
+    public String shippingForm(HttpSession session) {
+        return SessionUtil.getLoggedInUser(session) == null ? "redirect:/login" : "shop/shipping";
     }
     @PostMapping("/shop/shipping")
     public String shippingFormSubmit(@Valid ShippingModel shippingModel, BindingResult errors, HttpSession session) {
-        if (errors.hasErrors())
-            return "shop/shipping";
+        if (errors.hasErrors()) return "shop/shipping";
         session.setAttribute("shippingModel", shippingModel);
         return "redirect:/shop/payment";
     }
 
     @GetMapping("/shop/payment")
-    public String paymentForm(PaymentModel paymentModel) {
+    public String paymentForm() {
         return "shop/payment";
     }
 
@@ -96,7 +90,7 @@ public class ShopController {
         Orders orders = new Orders();
         orders.setUser_id(2);
         orders.setOrder_date(new Date());
-        orders.setIs_shipped(false);
+        orders.set_shipped(false);
         orders.setOrder_status("confirmed");
         orders.setAddress(shippingModel.getAddress());
         orders.setCity(shippingModel.getCity());
@@ -121,7 +115,7 @@ public class ShopController {
             orderitem.setOrder_id(orders.getOrder_id());
             orderitem.setProduct_id(cart.getItems().get(i).getProductId());
             orderitem.setQuantity(cart.getItems().get(i).getQuantity());
-            orderitem = orderitemRepository.save(orderitem);
+            orderitemRepository.save(orderitem);
         }
         return "shop/thankyou";
     }

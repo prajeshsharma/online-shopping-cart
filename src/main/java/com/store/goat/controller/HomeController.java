@@ -46,7 +46,7 @@ public class HomeController {
         return "placeholder";
     }
     @GetMapping("/login")
-    public String loginForm() {
+    public String loginForm(LoginModel loginModel) {
         return "login";
     }
 
@@ -54,7 +54,7 @@ public class HomeController {
     public String loginFormSubmit(@Valid LoginModel loginModel, BindingResult errors, HttpSession session) {
         if (errors.hasErrors()) return "login";
         List<User> u = userRepository.findByEmailAndPassword(loginModel.getEmail(), loginModel.getPassword());
-        if (u != null && u.size() > 0) {
+        if (u != null && !u.isEmpty()) {
             User user = u.get(0);
             SessionUtil.setLoggedInUser(session, user);
             return "placeholder";
